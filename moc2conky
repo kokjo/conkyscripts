@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import subprocess
-moc_output = subprocess.check_output(["mocp", "--info"], stderr=subprocess.PIPE).decode("UTF-8").splitlines()
+moc_output = subprocess.check_output(["mocp", "--info"], stderr=subprocess.PIPE)
+moc_output = moc_output.decode("UTF-8").splitlines()
 info = dict(line.strip().split(": ", maxsplit=1) for line in moc_output)
 if info["State"] in ("PLAY"):
     print(" ${color}title:${color white}",info["SongTitle"])
