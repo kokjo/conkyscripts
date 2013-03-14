@@ -1,0 +1,65 @@
+# ~/.conkyrc
+#
+double_buffer yes
+background yes
+
+use_xft yes
+xftfont Bitstream Vera Sans Mono:size=10
+xftalpha 0.8
+
+update_interval 1.0
+ 
+ total_run_times 0
+ 
+ own_window yes
+ own_window_type override
+ own_window_transparent yes
+ own_window_colour hotpink
+ own_window_hints undecorated,below,skip_taskbar,sticky,skip_pager
+ 
+ minimum_size 80 5
+ draw_shades no
+ draw_outline no
+ draw_borders no
+ stippled_borders 0
+ border_margin 6
+ border_width 1
+ default_color slategrey 
+ default_shade_color lightgrey
+ default_outline_color white
+ alignment top_right
+ gap_x 40
+ gap_y 40
+ no_buffers yes
+ uppercase no
+ 
+TEXT
+${color blue}System Info $hr
+ ${color}host   :${color white} ${nodename} 
+ ${color}kernel :${color white} ${sysname} ${kernel}
+ ${color}freq   :${color white} ${freq}Mhz ${color white}
+ ${color}uptime :${color white} $uptime ${color white}
+${color blue}Resources $hr
+ ${color}cpu 1  :${color white} ${cpu cpu1}% $alignc ${cpubar cpu1}
+ ${color}cpu 2  :${color white} ${cpu cpu2}% $alignc ${cpubar cpu2}
+ ${color}cpu 3  :${color white} ${cpu cpu3}% $alignc ${cpubar cpu3}
+ ${color}cpu 4  :${color white} ${cpu cpu4}% $alignc ${cpubar cpu4}
+ ${color}cpu 5  :${color white} ${cpu cpu5}% $alignc ${cpubar cpu5}
+ ${color}cpu 6  :${color white} ${cpu cpu6}% $alignc ${cpubar cpu6}
+ ${color}cpu 7  :${color white} ${cpu cpu7}% $alignc ${cpubar cpu7}
+ ${color}cpu 8  :${color white} ${cpu cpu8}% $alignc ${cpubar cpu8}
+ ${color}ram    :${color white} $memperc% $alignc $membar
+ ${color}swap   :${color white} $swapperc% $alignc $swapbar
+${color blue}Network $hr 
+ ${color white}eth0: ${color}down:${color white} ${downspeed eth0} ${color}  up:${color 
+ white} ${upspeed eth0}
+ ${color #888888}${downspeedgraph eth0 20,70}   ${color #888888}${upspeedgraph eth0 20,70}
+ ${color white}wlan0: ${color}down:${color white} ${downspeed wlan0} ${color}  up:${color white} ${upspeed wlan0}
+ ${color #888888}${downspeedgraph wlan0 20,70}   ${color #888888}${upspeedgraph wlan0 20,70}
+${color blue}Virtual Machines $hr
+${execpi 10 libvirt2conky webserver database}
+${color blue}Music $hr
+${execp moc2conky}
+${color blue}Todo(${lines todo}) $hr
+${color white} ${execi 5 cat ~/todo}
+
