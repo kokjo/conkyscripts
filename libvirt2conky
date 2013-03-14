@@ -1,0 +1,17 @@
+#!/usr/bin/python2
+import libvirt
+import sys
+format_str = " ${color}%s:${color %s}${alignr}%s"
+conn = libvirt.open("qemu:///system")
+for domainName in sys.argv[1:]:
+    try:
+        dom = conn.lookupByName(domainName)
+        state = dom.info()[0]
+        if  state == 1:
+            print format_str % (domainName, "green", "running")
+        elif state == 5:
+            print format_str % (domainName, "red", "shutdown")
+        else:
+            print format_str % (domainName, "yellow", "unknown")
+    except libvirt.libvirtError:
+        print format_str % (domainName, "yellow", "unknown")
