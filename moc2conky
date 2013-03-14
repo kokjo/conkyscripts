@@ -1,0 +1,12 @@
+#!/usr/bin/python
+import subprocess
+moc_output = subprocess.check_output(["mocp", "--info"], stderr=subprocess.PIPE).decode("UTF-8").splitlines()
+info = dict(line.strip().split(": ", maxsplit=1) for line in moc_output)
+if info["State"] in ("PLAY"):
+    print(" ${color}title:${color white}",info["SongTitle"])
+    print(" ${color}album:${color white}",info["Album"])
+    print(" ${color}artist:${color white}",info["Artist"])
+    print(" ${color}time:${color white}",info["CurrentTime"], "/", info["TotalTime"])
+else:
+    print(" ${color}Not Playing...")
+
