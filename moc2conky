@@ -1,6 +1,10 @@
 #!/usr/bin/python
 import subprocess
-moc_output = subprocess.check_output(["mocp", "--info"], stderr=subprocess.PIPE)
+try:
+    moc_output = subprocess.check_output(["mocp", "--info"], stderr=subprocess.PIPE)
+except:
+    print(" ${color}Not Playing...")
+    exit()
 moc_output = moc_output.decode("UTF-8").splitlines()
 info = dict(line.strip().split(": ", maxsplit=1) for line in moc_output)
 if info["State"] in ("PLAY"):
