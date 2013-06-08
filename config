@@ -8,15 +8,15 @@ xftfont Bitstream Vera Sans Mono:size=10
 xftalpha 0.8
 
 update_interval 1.0
- 
+
  total_run_times 0
- 
+
  own_window yes
  own_window_type override
  own_window_transparent yes
  own_window_colour hotpink
  own_window_hints undecorated,below,skip_taskbar,sticky,skip_pager
- 
+
  minimum_size 80 5
  draw_shades no
  draw_outline no
@@ -24,7 +24,7 @@ update_interval 1.0
  stippled_borders 0
  border_margin 6
  border_width 1
- default_color slategrey 
+ default_color slategrey
  default_shade_color lightgrey
  default_outline_color white
  alignment top_right
@@ -32,10 +32,10 @@ update_interval 1.0
  gap_y 40
  no_buffers yes
  uppercase no
- 
+
 TEXT
 ${color blue}System Info $hr
- ${color}host   :${color white} ${nodename} 
+ ${color}host   :${color white} ${nodename}
  ${color}kernel :${color white} ${sysname} ${kernel}
  ${color}freq   :${color white} ${freq}Mhz ${color white}
  ${color}uptime :${color white} $uptime ${color white}
@@ -43,15 +43,21 @@ ${color blue}Resources $hr
  ${color}cpu    :${color white} ${cpu}% $alignc ${cpubar}
  ${color}ram    :${color white} $memperc% $alignc $membar
  ${color}swap   :${color white} $swapperc% $alignc $swapbar
-${color blue}Network $hr 
- ${color white}eth0(${addr eth0}):$alignr ${downspeedf eth0}Kb/s
- $alignr ${upspeedf eth0}kb/s
- ${color green}${downspeedgraph eth0 20,140} ${color red}${upspeedgraph eth0 20,140}
- ${color white}wlan0(${addr wlan0}):$alignr ${downspeedf wlan0}kb/s
- $alignr ${upspeedf wlan0}kb/s
- ${color green}${downspeedgraph wlan0 20,140} ${color red}${upspeedgraph wlan0 20,140}
+${color blue}Network $hr
+${if_up eth0}\
+ ${color}eth0(${color white}${addr eth0}${color}):$alignr ${color green}${downspeedf eth0}Kb/s
+ $alignr ${color yellow}${upspeedf eth0}kb/s
+$endif\
+${if_up eth1}\
+ ${color}eth1(${color white}${addr eth1}${color}):$alignr ${color green}${downspeedf eth1}kb/s
+ $alignr ${color yellow}${upspeedf eth1}kb/s
+$endif\
+${if_up wlan0}\
+ ${color}wlan0(${color white}${addr wlan0}${color}):$alignr ${color green}${downspeedf wlan0}kb/s
+ $alignr ${color yellow}${upspeedf wlan0}kb/s
+$endif\
 ${color blue}Virtual Machines $hr
-${execpi 10 libvirt2conky webserver database}
+${execpi 10 libvirt2conky webserver}
 ${color blue}Music $hr
 ${execp moc2conky}
 ${color blue}Bitcoin $hr
