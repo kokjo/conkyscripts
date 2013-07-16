@@ -35,14 +35,16 @@ update_interval 1.0
 
 TEXT
 ${color blue}System Info $hr
- ${color}host   :${color white} ${nodename}
- ${color}kernel :${color white} ${sysname} ${kernel}
- ${color}freq   :${color white} ${freq}Mhz ${color white}
- ${color}uptime :${color white} $uptime ${color white}
+ ${color}host    :${color white} ${nodename}
+ ${color}kernel  :${color white} ${sysname} ${kernel}
+ ${color}freq    :${color white} ${freq}Mhz ${color white}
+ ${color}uptime  :${color white} $uptime ${color white}
+ ${color}procs   :${color white} $processes/$running_processes
+ ${color}threads :${color white} $threads/$running_threads
 ${color blue}Resources $hr
- ${color}cpu    :${color white} ${cpu}% $alignc ${cpubar}
- ${color}ram    :${color white} $memperc% $alignc $membar
- ${color}swap   :${color white} $swapperc% $alignc $swapbar
+ ${color}cpu     :${color white} ${cpu}%$alignc${cpubar}
+ ${color}ram     :${color white} ${memperc}%$alignc${membar}
+ ${color}swap    :${color white} ${swapperc}%$alignc${swapbar}
 ${color blue}Network $hr
 ${if_up eth0}\
  ${color}eth0(${color white}${addr eth0}${color}):$alignr ${color green}${downspeedf eth0}Kb/s
@@ -56,6 +58,10 @@ ${if_up wlan0}\
  ${color}wlan0(${color white}${addr wlan0}${color}):$alignr ${color green}${downspeedf wlan0}kb/s
  $alignr ${color yellow}${upspeedf wlan0}kb/s
 $endif\
+${color blue}Connections $hr
+ ${color}ssh     :${color white} ${tcp_portmon 22 22 count}
+ ${color}tor     :${color white} ${tcp_portmon 9050 9050 count}
+ ${color}bt      :${color white} ${tcp_portmon 6881 6999 count}
 ${color blue}Virtual Machines $hr
 ${execpi 10 libvirt2conky webserver}
 ${color blue}Music $hr
